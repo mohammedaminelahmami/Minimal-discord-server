@@ -8,10 +8,8 @@ public class ClientHandler implements Runnable{
 
     public static ArrayList<ClientHandler> clientHandlers = new ArrayList<>();
     private Socket socket;
-    // read data {mssgs from clients}
-    private BufferedReader bufferedReader;
-    // send data {mssgs from clients}
     private BufferedWriter bufferedWriter;
+    private BufferedReader bufferedReader;
     private String clientUsername;
 
     public ClientHandler(Socket socket)
@@ -22,7 +20,7 @@ public class ClientHandler implements Runnable{
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.clientUsername = bufferedReader.readLine();
             clientHandlers.add(this);
-            broadCastMessage("SERVER"  + clientUsername + "has entered the chat");
+            broadCastMessage("SERVER : "  + clientUsername + " has entered the chat");
         }catch(IOException e)
         {
             closeEverything(socket, bufferedReader, bufferedWriter);
@@ -35,7 +33,6 @@ public class ClientHandler implements Runnable{
         while(socket.isConnected())
         {
             try{
-                // hadi blokin operation dakchi lach dernaha f thread bohda ;
                 messageFromClient = bufferedReader.readLine();
                 broadCastMessage(messageFromClient);
             }catch(IOException e)

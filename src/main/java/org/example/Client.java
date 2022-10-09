@@ -17,6 +17,7 @@ public class Client {
             this.socket = socket;
             this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            this.username = username;
         }catch(IOException e)
         {
             closeEverything(socket, bufferedReader, bufferedWriter);
@@ -90,6 +91,7 @@ public class Client {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter your username for the group chat: ");
         String username = scanner.nextLine();
+
         Socket socket = new Socket("localhost", 2500);
         Client client = new Client(socket, username);
         client.listenForMessage();

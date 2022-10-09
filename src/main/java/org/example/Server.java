@@ -14,7 +14,6 @@ public class Server {
     public void startServer()
     {
         try{
-
             while(!serverSocket.isClosed())
             {
                 Socket socket = serverSocket.accept();
@@ -26,7 +25,7 @@ public class Server {
             }
 
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -49,5 +48,4 @@ public class Server {
         Server server = new Server(serverSocket);
         server.startServer();
     }
-
 }
